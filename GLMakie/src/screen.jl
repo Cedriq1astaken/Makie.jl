@@ -1005,6 +1005,9 @@ end
 refreshwindowcb(screen) = window -> refreshwindowcb(screen, window)
 
 function scalechangecb(screen, window, xscale, yscale)
+    if !isnothing(screen.config) && !screen.config.visible
+        return
+    end
     sf = min(xscale, yscale)
     # Some window managers may trigger this before the screen config is set and the window becomes visible
     if !isnothing(screen.config) && isnothing(screen.config.px_per_unit) && screen.scalefactor[] == screen.px_per_unit[]
